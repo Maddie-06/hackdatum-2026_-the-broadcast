@@ -29,7 +29,7 @@ Welcome to the official ACM Hackathon website, built with a **Broadcast-inspired
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML5, CSS3, JavaScript  
+- **Frontend:** vite , Tailwindcss  
 - **Frameworks & Libraries:**  
   - [Bootstrap](https://getbootstrap.com/) for responsive layouts  
   - [GSAP](https://greensock.com/gsap/) for animations  

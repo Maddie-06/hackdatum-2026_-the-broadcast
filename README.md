@@ -1,20 +1,45 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ACM Hackathon Website - Broadcast Theme
 
-# Run and deploy your AI Studio app
+Welcome to the official ACM Hackathon website, built with a **Broadcast-inspired theme** to provide a dynamic, immersive, and interactive experience for participants, judges, and visitors.
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/drive/1MAd7hCpGFuFzLmQbriwopgyB_mHR2Pis
+## 🌟 Features
 
-## Run Locally
+- **Broadcast Theme:** A sleek, modern design inspired by live broadcasts with attention-grabbing visuals.
+- **Interactive Sections:**  
+  - Event schedule with real-time updates  
+  - Participant highlights and team showcases  
+  - Countdown timers for hackathon milestones
+- **Responsive Design:** Optimized for desktops, tablets, and mobile devices.
+- **Animations & Effects:** Smooth transitions, hover effects, and interactive cards for a professional and engaging user experience.
+- **Accessibility:** Color-contrast and keyboard navigation friendly.
 
-**Prerequisites:**  Node.js
+---
 
+## 🎨 Theme Elements
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- **Header & Navigation:** Fixed, clean, and intuitive with broadcast-style banners.  
+- **Hero Section:** Eye-catching intro with gradient overlays and animated call-to-action buttons.  
+- **Timeline & Schedule:** Visual representation of events, workshops, and deadlines.  
+- **Team Showcase:** Hover animations and modal pop-ups for each participant team.  
+- **Footer:** Social links, ACM branding, and quick navigation links.  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** HTML5, CSS3, JavaScript  
+- **Frameworks & Libraries:**  
+  - [Bootstrap](https://getbootstrap.com/) for responsive layouts  
+  - [GSAP](https://greensock.com/gsap/) for animations  
+  - [FontAwesome](https://fontawesome.com/) for icons  
+- **Optional Backend:** Can be connected with Node.js or Firebase for real-time updates  
+
+---
+
+## 🚀 How to Run Locally
+
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/your-username/acm-hackathon-website.git

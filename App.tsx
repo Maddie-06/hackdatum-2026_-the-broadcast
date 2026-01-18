@@ -86,20 +86,6 @@ const App: React.FC = () => {
       <Cursor />
       <OverlayEffects />
       <Navbar />
-
-      {/* Persistent UI Elements */}
-      <div className="fixed top-24 left-8 z-50 pointer-events-none hidden md:block">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-signalRed flex items-center justify-center rounded-sm">
-            <Radio className="text-white animate-pulse" />
-          </div>
-          <div className="text-cream font-mono">
-            <div className="text-xs uppercase opacity-70">Frequency</div>
-            <div className="text-lg font-bold">102.6 MHZ</div>
-          </div>
-        </div>
-      </div>
-
       
 
       <main className="relative z-10">

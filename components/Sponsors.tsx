@@ -52,18 +52,26 @@ const Sponsors: React.FC<SponsorsProps> = ({ onJoin }) => {
           ))}
         </div>
 
-        <div className="mt-24 flex justify-center">
-          <button 
-            onClick={onJoin}
-            className="group relative px-12 py-6 bg-cream text-navy font-black text-xl uppercase tracking-widest transition-all shadow-[10px_10px_0px_#E63946] hover:shadow-[0px_0px_40px_rgba(230,57,70,0.4)] transform hover:-translate-y-2"
-          >
-            <div className="absolute inset-0 bg-signalOrange translate-y-full group-hover:translate-y-0 transition-transform duration-300 -z-0 opacity-10" />
-            <div className="relative flex items-center gap-4">
-               <Share2 className="text-signalRed group-hover:scale-125 transition-transform" />
-               <span>Join the Broadcast Team</span>
-            </div>
-          </button>
-        </div>
+       <div className="mt-24 flex justify-center">
+  <button 
+    onClick={onJoin}
+    /* REVERSED: 
+       1. Colors: bg-signalRed and text-cream.
+       2. Shadow: starts visible, disappears on hover (0px).
+       3. Transform: hover:translate-y-2 (moves down) instead of -y-2.
+    */
+    className="group relative px-12 py-6 bg-signalRed text-cream font-black text-xl uppercase tracking-widest transition-all shadow-[10px_10px_0px_#f5f5dc] hover:shadow-none transform hover:translate-y-2 active:scale-95"
+  >
+    {/* REVERSED: Overlay now slides DOWN from the top */}
+    <div className="absolute inset-0 bg-navy -translate-y-full group-hover:translate-y-0 transition-transform duration-300 -z-0 opacity-20" />
+    
+    <div className="relative flex items-center gap-4">
+       {/* REVERSED: Icon shrinks slightly on hover for a 'pushed' feel */}
+       <Share2 className="text-cream group-hover:scale-90 transition-transform" />
+       <span>Join the Broadcast Team</span>
+    </div>
+  </button>
+</div>
       </div>
     </section>
   );

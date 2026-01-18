@@ -34,13 +34,7 @@ const Stats: React.FC = () => {
         </div>
       </div>
 
-      {/* Floating Background Icons */}
-      <div className="absolute top-10 left-10 text-navy/5 -rotate-12 pointer-events-none">
-        <Signal size={200} strokeWidth={0.5} />
-      </div>
-      <div className="absolute bottom-10 right-10 text-navy/5 rotate-12 pointer-events-none">
-        <Mic size={200} strokeWidth={0.5} />
-      </div>
+     
     </section>
   );
 };

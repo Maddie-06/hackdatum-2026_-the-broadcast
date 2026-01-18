@@ -62,7 +62,7 @@ const Sponsors: React.FC<SponsorsProps> = ({ onJoin }) => {
     className="group relative px-12 py-6 bg-cream text-navy font-black text-xl uppercase tracking-widest transition-all transform hover:-translate-y-2 active:scale-95"
   >
     {/* Overlay slides UP from the bottom */}
-    <div className="absolute inset-0 bg-signalRed translate-y-full group-hover:translate-y-0 transition-transform duration-300 -z-0 opacity-10" />
+    <div className="absolute inset-0  translate-y-full group-hover:translate-y-0 transition-transform duration-300 -z-0 opacity-10" />
     
     <div className="relative flex items-center gap-4">
        {/* Icon scales UP on hover */}

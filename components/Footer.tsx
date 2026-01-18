@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-
+                 
         <div className="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-white/10 gap-8">
           <div className="flex items-center gap-4">
              <div className="w-10 h-10 bg-signalRed rounded-full flex items-center justify-center">
@@ -75,10 +75,15 @@ const Footer: React.FC = () => {
             <a href="#" className="hover:text-cream">Broadcast Rights</a>
           </div>
         </div>
+       
+      </div>
+<div className="absolute -bottom-10 -left-10 text-[20vw] font-black text-white/5 pointer-events-none select-none uppercase tracking-tighter leading-none">
+        OFF AIR
       </div>
       
       {/* Visual Glitch Fade-out at end of scroll */}
       <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-signalRed to-transparent opacity-50" />
+    
     </footer>
   );
 };

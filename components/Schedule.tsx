@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, Radio, Zap, Coffee } from 'lucide-react';
+import { Clock, Radio, Zap, Coffee, Mic2 } from 'lucide-react';
 
 const SCHEDULE_DATA = {
   day1: [
@@ -23,8 +22,9 @@ const Schedule: React.FC = () => {
   const [activeDay, setActiveDay] = useState<'day1' | 'day2'>('day1');
 
   return (
-    <section className="py-32 px-6 bg-navy relative min-h-screen">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-32 px-6 bg-navy relative min-h-screen overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        {/* Header Section */}
         <div className="text-center mb-16">
           <h2 className="text-6xl md:text-8xl font-black uppercase text-cream tracking-tighter mb-8">
             Program <span className="text-signalOrange">Schedule</span>
@@ -46,66 +46,72 @@ const Schedule: React.FC = () => {
         </div>
 
         <div className="relative">
-          {/* Animated Timeline Line with Glowing Pulse */}
-          <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-white/10 overflow-hidden">
+          {/* Main Vertical Timeline Line */}
+          <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-white/10">
             <motion.div 
               initial={{ height: 0 }}
               whileInView={{ height: '100%' }}
               viewport={{ once: true }}
-              transition={{ duration: 2, ease: "easeInOut" }}
               className="w-full bg-gradient-to-b from-signalRed via-signalOrange to-signalRed relative"
-            >
-              {/* Sliding Glow Pulse */}
-              <motion.div 
-                animate={{ top: ['0%', '100%'] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                className="absolute left-1/2 -translate-x-1/2 w-4 h-32 bg-signalRed/40 blur-xl"
-              />
-              <motion.div 
-                animate={{ top: ['0%', '100%'] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                className="absolute left-1/2 -translate-x-1/2 w-2 h-16 bg-white blur-sm"
-              />
-            </motion.div>
+            />
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div
               key={activeDay}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               className="space-y-12"
             >
               {SCHEDULE_DATA[activeDay].map((item, idx) => (
-                <div key={idx} className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                  {/* Timeline Dot */}
-                  <motion.div 
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    className="absolute left-[14px] md:left-1/2 md:-translate-x-1/2 w-5 h-5 bg-navy border-[3px] border-signalRed rounded-full z-10 hidden md:block" 
-                  />
+                <div key={idx} className="relative flex items-center">
                   
-                  <motion.div 
-                    initial={{ opacity: 0, x: idx % 2 === 0 ? 50 : -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className={`flex-1 w-full md:w-auto ${idx % 2 === 0 ? 'md:text-left' : 'md:text-right'} pl-12 md:pl-0 group`}
-                  >
-                    <div className={`inline-flex items-center gap-2 px-3 py-1 bg-navy border border-white/10 mb-4 font-mono text-xs group-hover:border-signalRed transition-colors ${idx % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
-                      <Clock className="w-3 h-3 text-signalOrange" />
-                      <span className="text-signalOrange">{item.time}</span>
-                    </div>
-                    <h3 className="text-3xl font-black text-cream uppercase mb-2 tracking-tight group-hover:text-signalRed transition-colors">{item.title}</h3>
-                    <div className={`flex items-center gap-3 ${idx % 2 === 0 ? 'justify-start' : 'md:justify-end'} opacity-50`}>
-                      <span className="text-xs font-mono uppercase tracking-widest">{item.category}</span>
-                      <div className="w-1 h-1 rounded-full bg-cream/40" />
-                      {item.icon}
-                    </div>
-                  </motion.div>
-                  
-                  <div className="flex-1 hidden md:block" />
+                  {/* Content Container */}
+                  <div className={`flex w-full items-center ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                    
+                    {/* The Content Side */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      className={`relative flex-1 pl-12 md:pl-0 ${
+                        idx % 2 === 0 
+                          ? 'md:text-right md:pr-16' // Left side text
+                          : 'md:text-left md:pl-16'  // Right side text
+                      }`}
+                    >
+                      {/* Mic Icon - Anchored using your logic to stick to the line */}
+                      <motion.div 
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        className={`absolute top-1/2 -translate-y-1/2 w-8 h-8 bg-navy border-2 border-signalRed rounded-full z-20 flex items-center justify-center shadow-[0_0_10px_rgba(239,68,68,0.3)]
+                          ${idx % 2 === 0 
+                            ? 'left-[-41px] md:left-auto md:-right-[55px]' // Right of left-side text
+                            : 'left-[-41px] md:-left-[55px]'               // Left of right-side text
+                          }`} 
+                      >
+                         <Mic2 size={14} className="text-signalRed" />
+                      </motion.div>
+
+                      <div className={`inline-flex items-center gap-2 px-3 py-1 bg-navy border border-white/10 mb-4 font-mono text-xs ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                        <Clock className="w-3 h-3 text-signalOrange" />
+                        <span className="text-signalOrange">{item.time}</span>
+                      </div>
+                      
+                      <h3 className="text-2xl md:text-4xl font-black text-cream uppercase mb-2 tracking-tight leading-tight">
+                        {item.title}
+                      </h3>
+                      
+                      <div className={`flex items-center gap-3 opacity-50 ${idx % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
+                        <span className="text-xs font-mono uppercase tracking-widest">{item.category}</span>
+                        <div className="w-1 h-1 rounded-full bg-cream/40" />
+                        {item.icon}
+                      </div>
+                    </motion.div>
+
+                    {/* Empty Side Spacer */}
+                    <div className="flex-1 hidden md:block" />
+                  </div>
                 </div>
               ))}
             </motion.div>

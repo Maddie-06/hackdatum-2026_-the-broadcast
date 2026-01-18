@@ -12,6 +12,7 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import OverlayEffects from './components/OverlayEffects';
 import Navbar from './components/Navbar';
+import Cursor from './components/Cursor';
 
 const TransmissionModal: React.FC<{ isOpen: boolean; onClose: () => void; title: string }> = ({ isOpen, onClose, title }) => (
   <AnimatePresence>
@@ -81,7 +82,8 @@ const App: React.FC = () => {
   });
 
   return (
-    <div ref={containerRef} className="relative bg-navy selection:bg-signalRed selection:text-white">
+    <div ref={containerRef} className="relative bg-navy selection:bg-signalRed selection:text-white  cursor-none">
+      <Cursor />
       <OverlayEffects />
       <Navbar />
 
@@ -98,23 +100,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-24 left-8 z-50 pointer-events-none hidden lg:block">
-         <div className="flex flex-col gap-1">
-           {[...Array(4)].map((_, i) => (
-             <div key={i} className="flex gap-1 items-end h-8">
-               {[...Array(6)].map((_, j) => (
-                 <motion.div 
-                   key={j}
-                   animate={{ height: `${Math.random() * 100}%` }}
-                   transition={{ duration: 0.3, repeat: Infinity, repeatType: "mirror" }}
-                   className="w-1 bg-signalOrange/40"
-                 />
-               ))}
-             </div>
-           ))}
-           <div className="text-[10px] font-mono text-signalOrange/60 mt-1 tracking-tighter uppercase">Signal Monitor Output</div>
-         </div>
-      </div>
+      
 
       <main className="relative z-10">
         <Hero scrollProgress={smoothProgress} onAction={openModal} />

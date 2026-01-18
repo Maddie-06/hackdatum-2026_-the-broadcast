@@ -90,33 +90,6 @@ const Hero: React.FC<HeroProps> = ({ scrollProgress, onAction }) => {
             </button>
           </div>
         </motion.div>
-
-        {/* Countdown Ticker */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 w-full max-w-4xl px-8 flex justify-between items-center z-10">
-           <div className="flex gap-12 font-mono">
-              {[
-                { label: 'DAYS', val: String(timeLeft.days).padStart(2, '0') },
-                { label: 'HOURS', val: String(timeLeft.hours).padStart(2, '0') },
-                { label: 'MINS', val: String(timeLeft.mins).padStart(2, '0') },
-                { label: 'SECS', val: String(timeLeft.secs).padStart(2, '0') }
-              ].map((t, idx) => (
-                <div key={idx} className="group cursor-default">
-                  <motion.div 
-                    animate={{ scale: [1, 1.1, 1] }} 
-                    transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-                    className="text-4xl font-black text-signalOrange group-hover:text-signalRed transition-colors"
-                  >
-                    {t.val}
-                  </motion.div>
-                  <div className="text-[10px] opacity-40 uppercase tracking-widest">{t.label}</div>
-                </div>
-              ))}
-           </div>
-           <div className="hidden md:block text-right font-mono text-xs opacity-40">
-              COORDINATES: 21.1458° N, 79.0882° E<br/>
-              BROADCAST ORIGIN: NAGPUR, INDIA
-           </div>
-        </div>
       </div>
     </section>
   );

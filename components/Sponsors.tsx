@@ -4,8 +4,8 @@ import { Radio, Share2 } from 'lucide-react';
 
 const TIERS = [
   { name: 'Network Tier', count: 1, height: 'h-48', width: 'w-full md:w-80' },
-  { name: 'Channel Tier', count: 3, height: 'h-32', width: 'w-full md:w-64' },
-  { name: 'Signal Tier', count: 6, height: 'h-24', width: 'w-full md:w-48' },
+  { name: 'Channel Tier', count: 3, height: 'h-48', width: 'w-full md:w-80' },
+  { name: 'Signal Tier', count: 6, height: 'h-48', width: 'w-full md:w-80' },
 ];
 
 interface SponsorsProps {

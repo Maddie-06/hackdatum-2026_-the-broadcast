@@ -66,48 +66,67 @@ const Schedule: React.FC = () => {
               {SCHEDULE_DATA[activeDay].map((item, idx) => (
                 <div key={idx} className="relative flex items-center min-h-[120px]">
                   
-                  {/* Mic Symbol - Perfectly stuck to the line */}
+                  {/* Mic Symbol - Alternating sides */}
                   <motion.div 
-                    initial={{ scale: 0, rotate: -45 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
+                    initial={{ scale: 0, x: "-50%" }}
+                    whileInView={{ 
+                      scale: 1, 
+                      x: idx % 2 === 0 ? "-160%" : "60%" // Pushes mic further from line
+                    }}
                     viewport={{ once: true }}
-                    className="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-10 h-10 bg-navy border-2 border-signalRed rounded-full z-20 flex items-center justify-center shadow-[0_0_15px_rgba(239,68,68,0.4)]"
+                    className="absolute hidden md:flex items-center justify-center w-10 h-10 bg-navy border-2 border-signalRed rounded-full z-20 shadow-[0_0_15px_rgba(239,68,68,0.4)] left-1/2 top-1/2 -translate-y-1/2"
                   >
                     <Mic2 size={18} className="text-signalRed" />
+                    
+                    {/* Small horizontal connector line to text */}
+                    <div className={`absolute w-6 h-[1px] bg-signalRed/30 top-1/2 -translate-y-1/2 
+                      ${idx % 2 === 0 ? 'right-full mr-2' : 'left-full ml-2'}`} 
+                    />
                   </motion.div>
 
-                  {/* Content Layout */}
-                  <div className={`flex w-full items-center ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                    
-                    {/* The Content Side */}
-                    <motion.div 
-                      initial={{ opacity: 0, x: idx % 2 === 0 ? -30 : 30 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      className={`flex-1 pl-16 md:pl-0 ${
-                        idx % 2 === 0 
-                          ? 'md:text-right md:pr-20' 
-                          : 'md:text-left md:pl-20'
-                      }`}
-                    >
-                      <div className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 mb-4 font-mono text-xs ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                        <Clock className="w-3 h-3 text-signalOrange" />
-                        <span className="text-signalOrange font-bold">{item.time}</span>
-                      </div>
-                      
-                      <h3 className="text-3xl md:text-5xl font-black text-cream uppercase mb-3 tracking-tighter leading-tight group-hover:text-signalRed transition-colors">
-                        {item.title}
-                      </h3>
-                      
-                      <div className={`flex items-center gap-3 opacity-60 ${idx % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-                        <span className="text-sm font-mono uppercase tracking-widest">{item.category}</span>
-                        <div className="w-1.5 h-1.5 rounded-full bg-signalOrange" />
-                        {item.icon}
-                      </div>
-                    </motion.div>
-
-                    {/* Empty Side Spacer */}
-                    <div className="flex-1 hidden md:block" />
+                  {/* Mobile-only Mic */}
+                  <div className="absolute left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 md:hidden flex items-center justify-center w-8 h-8 bg-navy border-2 border-signalRed rounded-full z-20">
+                    <Mic2 size={14} className="text-signalRed" />
                   </div>
+{/* Content Layout */}
+<div className={`flex w-full items-center ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+  
+  {/* The Content Side */}
+  <motion.div 
+    initial={{ opacity: 0, x: idx % 2 === 0 ? -30 : 30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    // group class is essential here for the hover effect on children
+    className={`flex-1 flex flex-col group pl-16 md:pl-0 ${
+      idx % 2 === 0 
+        ? 'md:items-end md:text-right md:pr-40' // Pr-40 creates a massive gap
+        : 'md:items-start md:text-left md:pl-40' // Pl-40 creates a massive gap
+    }`}
+  >
+    {/* Constraint wrapper to prevent text from stretching too wide */}
+    <div className="max-w-[400px] w-full"> 
+      <div className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 mb-4 font-mono text-xs transition-colors group-hover:border-signalRed/50 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+        <Clock className="w-3 h-3 text-signalOrange" />
+        <span className="text-signalOrange font-bold">{item.time}</span>
+      </div>
+      
+      {/* Title with restored hover effect */}
+      <h3 className="text-3xl md:text-6xl font-black text-cream uppercase mb-3 tracking-tighter leading-[0.85] transition-all duration-300 group-hover:text-signalRed group-hover:translate-x-2">
+        {item.title}
+      </h3>
+      
+      <div className={`flex items-center gap-3 opacity-60 transition-opacity group-hover:opacity-100 ${idx % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
+        <span className="text-sm font-mono uppercase tracking-widest">{item.category}</span>
+        <div className="w-1.5 h-1.5 rounded-full bg-signalOrange" />
+        <div className="transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12 text-signalOrange">
+          {item.icon}
+        </div>
+      </div>
+    </div>
+  </motion.div>
+
+  {/* Empty Side Spacer - Acts as a buffer */}
+  <div className="flex-1 hidden md:block" />
+</div>
                 </div>
               ))}
             </motion.div>

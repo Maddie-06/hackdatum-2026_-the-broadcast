@@ -92,7 +92,7 @@ const App: React.FC = () => {
         <Hero scrollProgress={smoothProgress} onAction={openModal} />
         <div id="control-room"><Intro /></div>
         <div id="schedule"><Schedule /></div>
-         <div id="hosts"><Hosts /></div>
+         <div id="hosts"><Hosts onAction={openModal} /></div>
         <div id="signal"><Stats /></div>
         <Sponsors onJoin={() => openModal("Production Partnership")} />
         <div id="faq"><FAQ /></div>

@@ -2,6 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 
+// Added onAction to the interface
+interface HostsProps {
+  onAction?: (title: string) => void;
+}
+
 const HOSTS = [
   { 
     name: 'Dr. Sarah J.', 
@@ -29,7 +34,8 @@ const HOSTS = [
   },
 ];
 
-const HostCard: React.FC<{ host: any; idx: number }> = ({ host, idx }) => {
+// 1. Pass onAction into the HostCard
+const HostCard: React.FC<{ host: any; idx: number; onAction?: (title: string) => void }> = ({ host, idx, onAction }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -41,7 +47,7 @@ const HostCard: React.FC<{ host: any; idx: number }> = ({ host, idx }) => {
       <motion.div 
         className="relative w-full h-full transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]"
       >
-        {/* Front Face - Now bg-navy */}
+        {/* Front Face */}
         <div className="absolute inset-0 [backface-visibility:hidden] overflow-hidden bg-navy border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-500">
           <img 
             src={host.image} 
@@ -61,35 +67,29 @@ const HostCard: React.FC<{ host: any; idx: number }> = ({ host, idx }) => {
           </div>
         </div>
 
-         {/* Back Face */}
-
+        {/* Back Face */}
         <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-signalRed p-8 flex flex-col justify-center items-center text-center text-white">
-
           <div className="w-16 h-1 bg-white/40 mb-6" />
-
           <h3 className="text-3xl font-black uppercase tracking-tighter mb-2">{host.name}</h3>
-
           <p className="font-mono text-xs text-white/70 uppercase tracking-widest mb-6">{host.role}</p>
-
           <p className="text-sm font-medium leading-relaxed opacity-90 mb-8">{host.bio}</p>
-
-          <button className="flex items-center gap-2 px-6 py-3 border-2 border-white/20 hover:bg-white hover:text-signalRed transition-all font-bold uppercase tracking-widest text-xs">
-
+          
+          {/* 2. TRIGGER THE MODAL HERE */}
+          <button 
+            onClick={() => onAction?.(`Signal Profile: ${host.name}`)}
+            className="flex items-center gap-2 px-6 py-3 border-2 border-white/20 hover:bg-white hover:text-signalRed transition-all font-bold uppercase tracking-widest text-xs"
+          >
             <Plus size={16} />
-
             See More Info
-
           </button>
-
         </div>
       </motion.div>
     </motion.div>
   );
 };
 
-const Hosts: React.FC = () => {
+const Hosts: React.FC<HostsProps> = ({ onAction }) => {
   return (
-    /* Background changed to bg-navy */
     <section className="py-32 px-6 bg-navy relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
@@ -104,17 +104,18 @@ const Hosts: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {HOSTS.map((host, idx) => (
-            <HostCard key={idx} host={host} idx={idx} />
+            // 3. Pass the prop down to the card
+            <HostCard key={idx} host={host} idx={idx} onAction={onAction} />
           ))}
         </div>
       </div>
       
-      {/* Background Decor - Matches Control Room style */}
+      {/* Background Decor */}
       <div className="absolute left-0 top-0 w-full h-full opacity-[0.02] pointer-events-none select-none text-[20vw] font-black text-cream flex items-center justify-center leading-none">
         TALENT
       </div>
 
-      {/* Perspective Grid Background */}
+      {/* Perspective Grid */}
       <div 
         className="absolute bottom-0 left-0 w-full h-96 opacity-[0.03] pointer-events-none"
         style={{

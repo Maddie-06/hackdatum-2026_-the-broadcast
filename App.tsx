@@ -5,6 +5,7 @@ import { Radio, Mic, Signal, Clock, Monitor, Users, Calendar, HelpCircle, ArrowR
 import Hero from './components/Hero';
 import Intro from './components/Intro';
 import Hosts from './components/Hosts';
+import ProblemStatement from './components/ProblemStatement';
 import Schedule from './components/Schedule';
 import Stats from './components/Stats';
 import Sponsors from './components/Sponsors';
@@ -92,7 +93,9 @@ const App: React.FC = () => {
         <Hero scrollProgress={smoothProgress} onAction={openModal} />
         <div id="control-room"><Intro /></div>
         <div id="schedule"><Schedule /></div>
-         <div id="hosts"><Hosts onAction={openModal} /></div>
+        <div id="hosts"><Hosts onAction={openModal} /></div>
+        <div id="problem-statement"><ProblemStatement /></div>
+
         <div id="signal"><Stats /></div>
         <Sponsors onJoin={() => openModal("Production Partnership")} />
         <div id="faq"><FAQ /></div>
